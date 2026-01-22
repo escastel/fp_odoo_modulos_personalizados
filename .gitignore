@@ -1,0 +1,52 @@
+# Datos de PostgreSQL
+volumesOdoo/dataPostgreSQL/*
+
+# Filestore de Odoo (sesiones, attachments, filestore)
+volumesOdoo/odoo/filestore/*
+volumesOdoo/odoo/sessions/*
+
+# Archivos de backup
+*.sql
+*.dump
+
+# Configuración local de Odoo
+odoo.conf
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.venv/
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.bak
+
+# Docker
+.env
+
+# Logs
+*.log
+
+# Ficheros de traducción compilados de Odoo
+**/*.mo
+
+# Archivos temporales
+*.tmp
+*.temp
