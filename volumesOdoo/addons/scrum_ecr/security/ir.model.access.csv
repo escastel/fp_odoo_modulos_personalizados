@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_scrum_ecr_scrum_ecr,scrum_ecr.scrum_ecr,model_scrum_ecr_scrum_ecr,base.group_user,1,1,1,1
+access_scrum_ecr_task,access.scrum_ecr.task,model_scrum_ecr_task,base.group_user,1,1,1,1
+access_scrum_ecr_sprint,access.scrum_ecr.sprint,model_scrum_ecr_sprint,base.group_user,1,1,1,1
+access_scrum_ecr_technology,access.scrum_ecr.technology,model_scrum_ecr_technology,base.group_user,1,1,1,1
