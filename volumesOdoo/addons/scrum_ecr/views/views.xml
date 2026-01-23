@@ -1,60 +1,165 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="scrum_ecr.list">
-      <field name="name">scrum_ecr list</field>
-      <field name="model">scrum_ecr.scrum_ecr</field>
+    <!-- ========== VISTAS DE TAREAS ========== -->
+
+    <!-- Vista Tree de Tareas -->
+    <record model="ir.ui.view" id="view_task_tree">
+      <field name="name">scrum_ecr task tree</field>
+      <field name="model">scrum_ecr.task</field>
       <field name="arch" type="xml">
-        <tree>
+        <tree string="Tareas">
           <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="date_end"/>
+          <field name="paused"/>
+          <field name="create_date"/>
         </tree>
       </field>
     </record>
--->
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="scrum_ecr.action_window">
-      <field name="name">scrum_ecr window</field>
-      <field name="res_model">scrum_ecr.scrum_ecr</field>
-      <field name="view_mode">tree,form</field>
-    </record>
--->
-
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="scrum_ecr.action_server">
-      <field name="name">scrum_ecr server</field>
-      <field name="model_id" ref="model_scrum_ecr_scrum_ecr"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
+     <!-- Vista Form de Tareas -->
+    <record model="ir.ui.view" id="view_task_form">
+      <field name="name">scrum_ecr task form</field>
+      <field name="model">scrum_ecr.task</field>
+      <field name="arch" type="xml">
+        <form string="Tarea">
+          <sheet>
+            <group>
+              <group>
+                <field name="name"/>
+                <field name="paused"/>
+              </group>
+              <group>
+                <field name="create_date"/>
+                <field name="date_end"/>
+              </group>
+            </group>
+            <group>
+              <field name="description" placeholder="Descripción de la Tarea..." />
+            </group>
+          </sheet>
+        </form>
       </field>
     </record>
--->
+
+
+    <!-- Acción de Tareas -->
+    <record id="action_window_task" model="ir.actions.act_window">
+        <field name="name">Tareas</field>
+        <field name="res_model">scrum_ecr.task</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear una nueva Tarea
+            </p>
+        </field>
+    </record>
+
+    <!-- ========== VISTAS DE SPRINTS ========== -->
+    
+    <!-- Vista Tree de Sprints -->
+    <record model="ir.ui.view" id="view_sprint_tree">
+        <field name="name">scrum_ecr sprint tree</field>
+        <field name="model">scrum_ecr.sprint</field>
+        <field name="arch" type="xml">
+            <tree string="Sprints">
+                <field name="name"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista Form de Sprints -->
+    <record id="view_sprint_form" model="ir.ui.view">
+        <field name="name">scrum_ecr sprint form</field>
+        <field name="model">scrum_ecr.sprint</field>
+        <field name="arch" type="xml">
+            <form string="Sprint">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date_start"/>
+                        </group>
+                        <group>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Descripción del Sprint..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción de Sprints -->
+    <record id="action_window_sprint" model="ir.actions.act_window">
+        <field name="name">Sprints</field>
+        <field name="res_model">scrum_ecr.sprint</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear un nuevo Sprint
+            </p>
+        </field>
+    </record>
+
+    <!-- ========== VISTAS DE TECNOLOGÍAS ========== -->
+    
+    <!-- Vista Tree de Tecnologías -->
+    <record model="ir.ui.view" id="view_technology_tree">
+        <field name="name">scrum_ecr technology tree</field>
+        <field name="model">scrum_ecr.technology</field>
+        <field name="arch" type="xml">
+            <tree string="Tecnologías">
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista Form de Tecnologías -->
+    <record model="ir.ui.view" id="view_technology_form">
+        <field name="name">scrum_ecr technology form</field>
+        <field name="model">scrum_ecr.technology</field>
+        <field name="arch" type="xml">
+            <form string="Tecnología">
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Descripción de la Tecnología..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción de Tecnologías -->
+    <record model="ir.actions.act_window" id="action_window_technology">
+        <field name="name">Tecnologías</field>
+        <field name="res_model">scrum_ecr.technology</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear una nueva Tecnología
+            </p>
+        </field>
+    </record>
+
+    <!-- ========== MENÚS ========== -->
 
     <!-- Top menu item -->
-<!--
-    <menuitem name="scrum_ecr" id="scrum_ecr.menu_root"/>
--->
+    <menuitem id="menu_scrum_ecr_root" name="SCRUM" sequence="10"/>
+
     <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="scrum_ecr.menu_1" parent="scrum_ecr.menu_root"/>
-    <menuitem name="Menu 2" id="scrum_ecr.menu_2" parent="scrum_ecr.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="scrum_ecr.menu_1_list" parent="scrum_ecr.menu_1"
-              action="scrum_ecr.action_window"/>
-    <menuitem name="Server to list" id="scrum_ecr" parent="scrum_ecr.menu_2"
-              action="scrum_ecr.action_server"/>
--->
+    <menuitem id="menu_scrum_ecr_sprints" name="Sprints" parent="menu_scrum_ecr_root" action="action_window_sprint" sequence="10"/>
+
+    <menuitem id="menu_scrum_ecr_tasks" name="Tareas" parent="menu_scrum_ecr_root" action="action_window_task" sequence="20"/>
+
+    <menuitem id="menu_scrum_ecr_technologies" name="Tecnologías" parent="menu_scrum_ecr_root" action="action_window_technology" sequence="30"/>
   </data>
 </odoo>
