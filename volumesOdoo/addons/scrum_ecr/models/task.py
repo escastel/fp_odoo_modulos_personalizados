@@ -6,17 +6,16 @@ class Task(models.Model):
 	_description = 'Tarea SCRUM'
 	_order = 'create_date desc'
 
-	name = fields.Char(string='Nombre', required=True)
-	description = fields.Text(string='Descripción')
-	create_date = fields.Datetime(string='Fecha de creación', readonly=True)
-	date_end = fields.Date(string='Fecha de finalización')
-	paused = fields.Boolean(string='En pausa', default=False)
-	sprint_id = fields.Many2one(
+	name_ecr = fields.Char(string='Nombre', required=True)
+	description_ecr = fields.Text(string='Descripción')
+	date_end_ecr = fields.Date(string='Fecha de finalización')
+	paused_ecr = fields.Boolean(string='En pausa', default=False)
+	sprint_id_ecr = fields.Many2one(
         comodel_name='scrum_ecr.sprint',
         string='Sprint',
         ondelete='set null',
     )
-	technology_ids = fields.Many2many(
+	technology_ids_ecr = fields.Many2many(
         comodel_name='scrum_ecr.technology',
         relation='scrum_ecr_task_technology_rel',
         column1='task_id',

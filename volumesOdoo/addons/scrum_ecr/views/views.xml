@@ -7,12 +7,12 @@
       <field name="name">scrum_ecr task tree</field>
       <field name="model">scrum_ecr.task</field>
       <field name="arch" type="xml">
-        <tree string="Tareas">
-          <field name="name"/>
-          <field name="sprint_id"/>
-          <field name="technology_ids"/>
-          <field name="date_end"/>
-          <field name="paused"/>
+        <tree string="Tareas" editable="bottom">
+          <field name="name_ecr"/>
+          <field name="sprint_id_ecr"/>
+          <field name="technology_ids_ecr" widget="many2many_tags"/>
+          <field name="date_end_ecr"/>
+          <field name="paused_ecr" widget="boolean"/>
           <field name="create_date"/>
         </tree>
       </field>
@@ -25,34 +25,87 @@
       <field name="arch" type="xml">
         <form string="Tarea">
           <sheet>
+            <widget name="web_ribbon" title="En Pausa" bg_color="bg-danger" invisible="not paused_ecr"/>
             <group>
               <group>
-                <field name="name"/>
-                <field name="sprint_id"/>
-                <field name="paused"/>
+                <field name="name_ecr"/>
+                <field name="sprint_id_ecr"/>
+                <field name="paused_ecr"/>
               </group>
               <group>
                 <field name="create_date"/>
-                <field name="date_end"/>
+                <field name="date_end_ecr"/>
               </group>
             </group>
-            <group string="Tecnologías utilizadas">
-              <field name="technology_ids" nolabel="1"/>
-            </group>
             <group>
-              <field name="description" placeholder="Descripción de la Tarea..." />
+              <field name="description_ecr" placeholder="Descripción de la Tarea..." />
+            </group>
+            <group string="Tecnologías utilizadas">
+              <field name="technology_ids_ecr" widget="many2many_tags" nolabel="1"/>
             </group>
           </sheet>
         </form>
       </field>
     </record>
 
+    <!-- Vista Kanban de Tareas -->
+    <record model="ir.ui.view" id="view_task_kanban">
+      <field name="name">scrum_ecr task kanban</field>
+      <field name="model">scrum_ecr.task</field>
+      <field name="arch" type="xml">
+        <kanban class="o_kanban_small_column" default_group_by="sprint_id_ecr" quick_create="false">
+          <field name="name_ecr"/>
+          <field name="sprint_id_ecr"/>
+          <field name="technology_ids_ecr" widget="many2many_tags"/>
+          <field name="date_end_ecr"/>
+          <field name="paused_ecr"/>
+          <field name="create_date"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click #{record.paused_ecr.raw_value ? 'bg-danger-subtle' : ''}">
+                <div class="oe_kanban_details">
+                  <strong class="o_kanban_record_title">
+                    <field name="name_ecr"/>
+                  </strong>
+                  <div class="o_kanban_tags_section">
+                    <field name="technology_ids_ecr" widget="many2many_tags"/>
+                  </div>
+                  <div class="o_kanban_record_bottom">
+                    <div class="oe_kanban_bottom_left">
+                      <field name="date_end_ecr" widget="date"/>
+                    </div>
+                    <div class="oe_kanban_bottom_right">
+                      <t t-if="record.paused_ecr.raw_value">
+                        <span class="badge bg-danger">En pausa</span>
+                      </t>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- Vista Calendar de Tareas -->
+    <record model="ir.ui.view" id="view_task_calendar">
+      <field name="name">scrum_ecr task calendar</field>
+      <field name="model">scrum_ecr.task</field>
+      <field name="arch" type="xml">
+        <calendar string="Tareas" date_start="date_end_ecr" color="sprint_id_ecr" mode="month">
+          <field name="name_ecr"/>
+          <field name="sprint_id_ecr"/>
+          <field name="paused_ecr"/>
+        </calendar>
+      </field>
+    </record>
 
     <!-- Acción de Tareas -->
     <record id="action_window_task" model="ir.actions.act_window">
         <field name="name">Tareas</field>
         <field name="res_model">scrum_ecr.task</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban,calendar</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Crear una nueva Tarea
@@ -68,9 +121,9 @@
         <field name="model">scrum_ecr.sprint</field>
         <field name="arch" type="xml">
             <tree string="Sprints">
-                <field name="name"/>
-                <field name="date_start"/>
-                <field name="date_end"/>
+                <field name="name_ecr"/>
+                <field name="date_start_ecr"/>
+                <field name="date_end_ecr"/>
             </tree>
         </field>
     </record>
@@ -84,22 +137,22 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="name"/>
-                            <field name="date_start"/>
-                            <field name="date_end"/>
+                            <field name="name_ecr"/>
+                            <field name="date_start_ecr"/>
+                            <field name="date_end_ecr"/>
                         </group>
                     </group>
                     <group>
-                        <field name="description" placeholder="Descripción del Sprint..."/>
+                        <field name="description_ecr" placeholder="Descripción del Sprint..."/>
                     </group>
                     <notebook>
                         <page string="Tareas del Sprint">
-                            <field name="task_ids">
+                            <field name="task_ids_ecr">
                                 <tree editable="bottom">
-                                    <field name="name"/>
-                                    <field name="date_end"/>
-                                    <field name="technology_ids"/>
-                                    <field name="paused"/>
+                                    <field name="name_ecr"/>
+                                    <field name="date_end_ecr"/>
+                                    <field name="technology_ids_ecr" widget="many2many_tags"/>
+                                    <field name="paused_ecr"/>
                                 </tree>
                             </field>
                         </page>
@@ -129,8 +182,9 @@
         <field name="model">scrum_ecr.technology</field>
         <field name="arch" type="xml">
             <tree string="Tecnologías">
-                <field name="name"/>
-                <field name="description"/>
+                <field name="image_ecr" widget="image" class="oe_avatar"/>
+                <field name="name_ecr"/>
+                <field name="description_ecr"/>
             </tree>
         </field>
     </record>
@@ -142,16 +196,16 @@
         <field name="arch" type="xml">
             <form string="Tecnología">
                 <sheet>
-                    <field name="image" widget="image" class="oe_avatar"/>
+                    <field name="image_ecr" widget="image" class="oe_avatar"/>
                     <group>
-                        <field name="name"/>
+                        <field name="name_ecr"/>
                     </group>
                     <group>
-                        <field name="description" placeholder="Descripción de la Tecnología..."/>
+                        <field name="description_ecr" placeholder="Descripción de la Tecnología..."/>
                     </group>
                     <notebook>
                         <page string="Tareas que usan esta tecnología">
-                            <field name="task_ids"/>
+                            <field name="task_ids_ecr" widget="many2many_tags"/>
                         </page>
                     </notebook>
                 </sheet>

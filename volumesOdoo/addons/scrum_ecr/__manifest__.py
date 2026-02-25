@@ -22,7 +22,7 @@ Módulo para la gestión de proyectos SCRUM
 
     # always loaded
     'data': [
-        # 'security/security.xml', Para la categoria y grupo de usuarios SCRUM
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
     ],
