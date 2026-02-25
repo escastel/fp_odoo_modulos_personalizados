@@ -174,13 +174,13 @@
     <!-- ========== MENÚS ========== -->
 
     <!-- Top menu item -->
-    <menuitem id="menu_scrum_ecr_root" name="SCRUM" sequence="10"/>
+    <menuitem id="menu_scrum_ecr_root" name="SCRUM" sequence="10" groups="scrum_ecr.group_scrum_ecr"/>
 
     <!-- menu categories -->
-    <menuitem id="menu_scrum_ecr_sprints" name="Sprints" parent="menu_scrum_ecr_root" action="action_window_sprint" sequence="10"/>
+    <menuitem id="menu_scrum_ecr_sprints" name="Sprints" parent="menu_scrum_ecr_root" action="action_window_sprint" sequence="10" groups="scrum_ecr.group_scrum_ecr"/>
 
-    <menuitem id="menu_scrum_ecr_tasks" name="Tareas" parent="menu_scrum_ecr_root" action="action_window_task" sequence="20"/>
+    <menuitem id="menu_scrum_ecr_tasks" name="Tareas" parent="menu_scrum_ecr_root" action="action_window_task" sequence="20" groups="scrum_ecr.group_scrum_ecr"/>
 
-    <menuitem id="menu_scrum_ecr_technologies" name="Tecnologías" parent="menu_scrum_ecr_root" action="action_window_technology" sequence="30"/>
+    <menuitem id="menu_scrum_ecr_technologies" name="Tecnologías" parent="menu_scrum_ecr_root" action="action_window_technology" sequence="30" groups="scrum_ecr.group_scrum_ecr"/>
   </data>
 </odoo>

@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+    <!-- Categoría del módulo SCRUM -->
+    <record id="module_scrum_ecr_category" model="ir.module.category">
+      <field name="name">Gestión SCRUM</field>
+      <field name="description">Módulo de gestión de proyectos con metodología SCRUM</field>
+      <field name="sequence">50</field>
+    </record>
+
+    <!-- Grupo de usuarios SCRUM -->
+    <record id="group_scrum_ecr" model="res.groups">
+      <field name="name">Usuario SCRUM</field>
+      <field name="category_id" ref="module_scrum_ecr_category"/>
+      <field name="comment">Los usuarios de este grupo pueden acceder al módulo SCRUM.</field>
+    </record>
+  </data>
+</odoo>
