@@ -21,6 +21,8 @@ services:
       - ./volumesOdoo/addons:/mnt/extra-addons
       - ./volumesOdoo/odoo/filestore:/var/lib/odoo/filestore
       - ./volumesOdoo/odoo/sessions:/var/lib/odoo/sessions
+      - ./volumesOdoo/config_odoo:/etc/odoo
+      - ./volumesOdoo/log:/var/log/odoo
     #Indicamos que el contenedor funcionara con usuario root y no con usuario odoo
     user: root
     # Definimos variables de entorno de Odoo

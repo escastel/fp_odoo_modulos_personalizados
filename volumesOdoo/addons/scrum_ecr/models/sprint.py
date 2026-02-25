@@ -9,3 +9,8 @@ class Sprint(models.Model):
 	description = fields.Text(string='Descripción')
 	date_start = fields.Date(string='Fecha de inicio', required=True)
 	date_end = fields.Date(string='Fecha de finalización', required=True)
+	task_ids = fields.One2many(
+        comodel_name='scrum_ecr.task',
+        inverse_name='sprint_id',
+        string='Tareas',
+    )

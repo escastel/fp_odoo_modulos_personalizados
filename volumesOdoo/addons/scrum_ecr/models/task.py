@@ -11,3 +11,15 @@ class Task(models.Model):
 	create_date = fields.Datetime(string='Fecha de creación', readonly=True)
 	date_end = fields.Date(string='Fecha de finalización')
 	paused = fields.Boolean(string='En pausa', default=False)
+	sprint_id = fields.Many2one(
+        comodel_name='scrum_ecr.sprint',
+        string='Sprint',
+        ondelete='set null',
+    )
+	technology_ids = fields.Many2many(
+        comodel_name='scrum_ecr.technology',
+        relation='scrum_ecr_task_technology_rel',
+        column1='task_id',
+        column2='technology_id',
+        string='Tecnologías',
+    )
