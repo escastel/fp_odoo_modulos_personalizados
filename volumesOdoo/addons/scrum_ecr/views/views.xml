@@ -53,7 +53,7 @@
       <field name="name">scrum_ecr task kanban</field>
       <field name="model">scrum_ecr.task</field>
       <field name="arch" type="xml">
-        <kanban class="o_kanban_small_column" default_group_by="sprint_id_ecr" quick_create="false" group_create="false" group_delete="false">
+        <kanban class="o_kanban_small_column" default_group_by="sprint_id_ecr">
           <field name="name_ecr"/>
           <field name="sprint_id_ecr"/>
           <field name="technology_ids_ecr" widget="many2many_tags"/>
@@ -106,7 +106,7 @@
     <record id="action_window_task" model="ir.actions.act_window">
         <field name="name">Tareas</field>
         <field name="res_model">scrum_ecr.task</field>
-        <field name="view_mode">tree,form,kanban,calendar</field>
+        <field name="view_mode">kanban,tree,form,calendar</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Crear una nueva Tarea
@@ -206,14 +206,7 @@
                     </group>
                     <notebook>
                         <page string="Tareas que usan esta tecnología">
-                            <field name="task_ids_ecr">
-                                <tree>
-                                    <field name="name_ecr"/>
-                                    <field name="sprint_id_ecr"/>
-                                    <field name="date_end_ecr"/>
-                                    <field name="paused_ecr"/>
-                                </tree>
-                            </field>
+                            <field name="task_ids_ecr" widget="many2many_tags"/>
                         </page>
                     </notebook>
                 </sheet>
@@ -239,9 +232,9 @@
     <menuitem id="menu_scrum_ecr_root" name="SCRUM" sequence="10" groups="scrum_ecr.group_scrum_ecr"/>
 
     <!-- menu categories -->
-    <menuitem id="menu_scrum_ecr_sprints" name="Sprints" parent="menu_scrum_ecr_root" action="action_window_sprint" sequence="10" groups="scrum_ecr.group_scrum_ecr"/>
+    <menuitem id="menu_scrum_ecr_tasks" name="Tareas" parent="menu_scrum_ecr_root" action="action_window_task" sequence="10" groups="scrum_ecr.group_scrum_ecr"/>
 
-    <menuitem id="menu_scrum_ecr_tasks" name="Tareas" parent="menu_scrum_ecr_root" action="action_window_task" sequence="20" groups="scrum_ecr.group_scrum_ecr"/>
+    <menuitem id="menu_scrum_ecr_sprints" name="Sprints" parent="menu_scrum_ecr_root" action="action_window_sprint" sequence="20" groups="scrum_ecr.group_scrum_ecr"/>
 
     <menuitem id="menu_scrum_ecr_technologies" name="Tecnologías" parent="menu_scrum_ecr_root" action="action_window_technology" sequence="30" groups="scrum_ecr.group_scrum_ecr"/>
   </data>
