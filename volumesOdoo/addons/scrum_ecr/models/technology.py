@@ -3,6 +3,7 @@ from odoo import models, fields, api
 class Technology(models.Model):
 	_name = 'scrum_ecr.technology'
 	_description = 'Tecnología SCRUM'
+	_rec_name = 'name_ecr'
 	_order = 'name_ecr'
 
 	name_ecr = fields.Char(string='Nombre', required=True)

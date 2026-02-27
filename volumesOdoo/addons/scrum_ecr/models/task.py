@@ -4,6 +4,7 @@ from odoo import models, fields, api
 class Task(models.Model):
 	_name = 'scrum_ecr.task'
 	_description = 'Tarea SCRUM'
+	_rec_name = 'name_ecr'
 	_order = 'create_date desc'
 
 	name_ecr = fields.Char(string='Nombre', required=True)

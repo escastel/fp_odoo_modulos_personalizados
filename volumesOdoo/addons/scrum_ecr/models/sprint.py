@@ -3,6 +3,7 @@ from odoo import models, fields, api
 class Sprint(models.Model):
 	_name = 'scrum_ecr.sprint'
 	_description = 'Sprint SCRUM'
+	_rec_name = 'name_ecr'
 	_order = 'date_start_ecr desc'
 
 	name_ecr = fields.Char(string='Nombre', required=True)

@@ -53,7 +53,7 @@
       <field name="name">scrum_ecr task kanban</field>
       <field name="model">scrum_ecr.task</field>
       <field name="arch" type="xml">
-        <kanban class="o_kanban_small_column" default_group_by="sprint_id_ecr" quick_create="false">
+        <kanban class="o_kanban_small_column" default_group_by="sprint_id_ecr" quick_create="false" group_create="false" group_delete="false">
           <field name="name_ecr"/>
           <field name="sprint_id_ecr"/>
           <field name="technology_ids_ecr" widget="many2many_tags"/>
@@ -96,6 +96,7 @@
         <calendar string="Tareas" date_start="date_end_ecr" color="sprint_id_ecr" mode="month">
           <field name="name_ecr"/>
           <field name="sprint_id_ecr"/>
+          <field name="technology_ids_ecr"/>
           <field name="paused_ecr"/>
         </calendar>
       </field>
@@ -205,7 +206,14 @@
                     </group>
                     <notebook>
                         <page string="Tareas que usan esta tecnología">
-                            <field name="task_ids_ecr" widget="many2many_tags"/>
+                            <field name="task_ids_ecr">
+                                <tree>
+                                    <field name="name_ecr"/>
+                                    <field name="sprint_id_ecr"/>
+                                    <field name="date_end_ecr"/>
+                                    <field name="paused_ecr"/>
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
